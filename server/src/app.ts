@@ -1,17 +1,17 @@
-import express from 'express';
+import express  from 'express';
+import connect from './config/db';
 import dotenv from 'dotenv';
-import connectDB from './config/db';
-
+import {user_signup_control} from "./Controller/UserControl";
 
 dotenv.config();
-
 const app = express();
+
 app.use(express.json());
 
-const PORT = process.env.PORT;
+app.use('/signup', user_signup_control);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+
+app.listen(process.env.port, () => {
+  connect();
+  console.log('Server is running');
 });
-
-connectDB();
